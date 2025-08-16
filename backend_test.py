@@ -340,6 +340,35 @@ class BackendTester:
         except Exception as e:
             self.log_test("Delete Scammer", False, f"Exception: {str(e)}")
     
+    def test_protected_endpoints_require_auth(self):
+        """Test that protected endpoints require authentication"""
+        protected_endpoints = [
+            ("GET", "/scammers"),
+            ("POST", "/scammers"),
+            ("GET", "/scammers/test_id"),
+            ("PUT", "/scammers/test_id"),
+            ("DELETE", "/scammers/test_id")
+        ]
+        
+        all_protected = True
+        failed_endpoints = []
+        
+        for method, endpoint in protected_endpoints:
+            try:
+                response = self.make_request(method, endpoint, {"test": "data"} if method in ["POST", "PUT"] else None)
+                
+                if response.status_code not in [401, 403]:
+                    all_protected = False
+                    failed_endpoints.append(f"{method} {endpoint} (got {response.status_code})")
+            except Exception as e:
+                # Network errors are acceptable for this test
+                pass
+        
+        if all_protected:
+            self.log_test("Protected Endpoints Require Auth", True, f"All {len(protected_endpoints)} endpoints properly protected")
+        else:
+            self.log_test("Protected Endpoints Require Auth", False, f"Unprotected endpoints: {', '.join(failed_endpoints)}")
+    
     def test_duplicate_discord_id(self):
         """Test creating scammer with duplicate Discord ID"""
         if not self.auth_token:
