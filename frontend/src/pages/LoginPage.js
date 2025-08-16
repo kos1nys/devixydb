@@ -38,28 +38,91 @@ const LoginPage = () => {
     if (error) setError('');
   };
 
+  const formContainerStyle = {
+    background: 'rgba(25, 25, 25, 0.9)',
+    borderRadius: '10px',
+    padding: '30px',
+    marginBottom: '30px',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+    border: '1px solid #333',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '12px 15px',
+    borderRadius: '5px',
+    border: '1px solid #444',
+    background: '#1a1a1a',
+    color: '#fff',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'all 0.3s ease',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    boxSizing: 'border-box'
+  };
+
+  const buttonStyle = {
+    width: '100%',
+    padding: '15px 25px',
+    background: 'linear-gradient(to right, #333, #555)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    transition: 'all 0.3s ease',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    opacity: loading ? 0.7 : 1
+  };
+
   return (
     <Layout>
-      <div className="min-h-[80vh] flex items-center justify-center">
-        <div className="w-full max-w-md">
-          <div className="bg-gray-800/60 border border-gray-700 rounded-lg p-8 backdrop-blur-sm">
-            <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold text-white mb-2">
-                <i className="fas fa-shield-alt mr-3 text-gray-400"></i>
+      <div style={{ 
+        minHeight: '80vh', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+      }}>
+        <div style={{ width: '100%', maxWidth: '450px' }}>
+          <div style={formContainerStyle}>
+            <div style={{ textAlign: 'center', marginBottom: '30px' }}>
+              <h1 style={{
+                fontSize: '2.2rem',
+                fontWeight: 'bold',
+                color: '#fff',
+                marginBottom: '10px',
+                fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+              }}>
+                <i className="fas fa-shield-alt mr-3" style={{ color: '#aaa' }}></i>
                 Панель управления
               </h1>
-              <p className="text-gray-400">Вход для администраторов</p>
+              <p style={{ color: '#aaa', margin: 0 }}>Безопасный вход для администраторов</p>
             </div>
 
             {error && (
-              <div className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-center">
+              <div style={{
+                marginBottom: '20px',
+                padding: '15px',
+                background: 'rgba(200, 0, 0, 0.2)',
+                border: '1px solid #ff6b6b',
+                borderRadius: '5px',
+                color: '#ff6b6b',
+                textAlign: 'center'
+              }}>
                 {error}
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+            <form onSubmit={handleSubmit}>
+              <div style={{ marginBottom: '20px' }}>
+                <label style={{
+                  display: 'block',
+                  marginBottom: '8px',
+                  fontWeight: '600',
+                  color: '#ccc'
+                }}>
                   Логин
                 </label>
                 <input
@@ -67,13 +130,26 @@ const LoginPage = () => {
                   value={credentials.username}
                   onChange={(e) => handleChange('username', e.target.value)}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:border-gray-500 focus:ring-gray-500/50 transition-colors"
                   placeholder="Введите логин"
+                  style={inputStyle}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#666';
+                    e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#444';
+                    e.target.style.boxShadow = 'none';
+                  }}
                 />
               </div>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-2">
+              <div style={{ marginBottom: '25px' }}>
+                <label style={{
+                  display: 'block',
+                  marginBottom: '8px',
+                  fontWeight: '600',
+                  color: '#ccc'
+                }}>
                   Пароль
                 </label>
                 <input
@@ -81,35 +157,85 @@ const LoginPage = () => {
                   value={credentials.password}
                   onChange={(e) => handleChange('password', e.target.value)}
                   required
-                  className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:border-gray-500 focus:ring-gray-500/50 transition-colors"
                   placeholder="Введите пароль"
+                  style={inputStyle}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = '#666';
+                    e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#444';
+                    e.target.style.boxShadow = 'none';
+                  }}
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 disabled:from-gray-800 disabled:to-gray-800 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] disabled:scale-100 disabled:cursor-not-allowed"
+                style={buttonStyle}
+                onMouseEnter={(e) => {
+                  if (!loading) {
+                    e.target.style.background = 'linear-gradient(to right, #444, #666)';
+                    e.target.style.transform = 'translateY(-2px)';
+                    e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) {
+                    e.target.style.background = 'linear-gradient(to right, #333, #555)';
+                    e.target.style.transform = 'translateY(0)';
+                    e.target.style.boxShadow = 'none';
+                  }
+                }}
               >
                 {loading ? (
-                  <span className="flex items-center justify-center">
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-spinner fa-spin mr-2"></i>
                     Вход...
                   </span>
                 ) : (
-                  <span className="flex items-center justify-center">
+                  <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <i className="fas fa-sign-in-alt mr-2"></i>
-                    Войти
+                    Войти в систему
                   </span>
                 )}
               </button>
             </form>
 
-            <div className="mt-8 p-4 bg-gray-700/50 border border-gray-600 rounded-lg">
-              <h3 className="text-sm font-medium text-gray-300 mb-2">Данные для входа по умолчанию:</h3>
-              <div className="text-sm text-gray-400 space-y-1">
-                <p><strong>Логин:</strong> admin</p>
-                <p><strong>Пароль:</strong> admin123</p>
+            <div style={{
+              marginTop: '25px',
+              padding: '15px',
+              background: 'rgba(30, 30, 30, 0.8)',
+              border: '1px solid #333',
+              borderRadius: '5px'
+            }}>
+              <h3 style={{
+                fontSize: '0.95rem',
+                fontWeight: '600',
+                color: '#ccc',
+                marginBottom: '10px',
+                margin: '0 0 10px 0'
+              }}>
+                🔐 Администраторский доступ:
+              </h3>
+              <div style={{ fontSize: '0.9rem', color: '#aaa' }}>
+                <p style={{ margin: '5px 0' }}>
+                  <strong style={{ color: '#ccc' }}>Логин:</strong> <code style={{ 
+                    background: '#1a1a1a', 
+                    padding: '2px 6px', 
+                    borderRadius: '3px',
+                    fontFamily: 'monospace'
+                  }}>cyber_admin_2025</code>
+                </p>
+                <p style={{ margin: '5px 0' }}>
+                  <strong style={{ color: '#ccc' }}>Пароль:</strong> <code style={{ 
+                    background: '#1a1a1a', 
+                    padding: '2px 6px', 
+                    borderRadius: '3px',
+                    fontFamily: 'monospace'
+                  }}>Sc4mm3r_Db@Pr0t3ct!</code>
+                </p>
               </div>
             </div>
           </div>
