@@ -447,6 +447,7 @@ class BackendTester:
         # Data Validation Tests
         print("✅ DATA VALIDATION TESTS")
         print("-" * 30)
+        self.test_protected_endpoints_require_auth()
         self.test_duplicate_discord_id()
         
         # Summary
