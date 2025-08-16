@@ -10,47 +10,115 @@ const ScammerDetailModal = ({ isOpen, onClose, scammer }) => {
   };
 
   const getStatusBadge = (status) => {
-    const baseClasses = "px-3 py-1 rounded-full text-sm font-semibold border";
+    const baseStyle = {
+      padding: '5px 12px',
+      borderRadius: '20px',
+      fontSize: '0.85rem',
+      fontWeight: '600'
+    };
+    
     if (status === 'active') {
-      return `${baseClasses} bg-red-500/20 text-red-400 border-red-500/50`;
+      return {
+        ...baseStyle,
+        background: 'rgba(200, 0, 0, 0.2)',
+        color: '#ff6b6b',
+        border: '1px solid #ff6b6b'
+      };
     } else {
-      return `${baseClasses} bg-green-500/20 text-green-400 border-green-500/50`;
+      return {
+        ...baseStyle,
+        background: 'rgba(0, 200, 0, 0.2)',
+        color: '#6bff6b',
+        border: '1px solid #6bff6b'
+      };
     }
   };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Подробная информация о мошеннике">
-      <div className="space-y-4">
-        <div>
-          <strong className="text-gray-400 inline-block w-36">ID Discord:</strong>
-          <span className="text-gray-200 font-mono">{scammer.discord_id}</span>
+      <div>
+        <div style={{
+          marginBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'inline-block',
+            width: '150px'
+          }}>ID Discord:</strong>
+          <span style={{ 
+            color: '#f0f0f0',
+            fontFamily: 'monospace'
+          }}>{scammer.discord_id}</span>
         </div>
         
-        <div>
-          <strong className="text-gray-400 inline-block w-36">Ник Discord:</strong>
-          <span className="text-gray-200">{scammer.discord_name}</span>
+        <div style={{
+          marginBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'inline-block',
+            width: '150px'
+          }}>Ник Discord:</strong>
+          <span style={{ color: '#f0f0f0' }}>{scammer.discord_name}</span>
         </div>
         
-        <div>
-          <strong className="text-gray-400 inline-block w-36">Метод обмана:</strong>
-          <span className="text-gray-200">{scammer.scam_method}</span>
+        <div style={{
+          marginBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'inline-block',
+            width: '150px'
+          }}>Метод обмана:</strong>
+          <span style={{ color: '#f0f0f0' }}>{scammer.scam_method}</span>
         </div>
         
-        <div>
-          <strong className="text-gray-400 inline-block w-36">Дата добавления:</strong>
-          <span className="text-gray-200">{formatDate(scammer.created_at)}</span>
+        <div style={{
+          marginBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'inline-block',
+            width: '150px'
+          }}>Дата добавления:</strong>
+          <span style={{ color: '#f0f0f0' }}>{formatDate(scammer.created_at)}</span>
         </div>
         
-        <div>
-          <strong className="text-gray-400 inline-block w-36">Статус:</strong>
-          <span className={getStatusBadge(scammer.status)}>
+        <div style={{
+          marginBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'inline-block',
+            width: '150px'
+          }}>Статус:</strong>
+          <span style={getStatusBadge(scammer.status)}>
             {scammer.status === 'active' ? 'Активен' : 'Неактивен'}
           </span>
         </div>
         
-        <div>
-          <strong className="text-gray-400 block mb-2">Описание:</strong>
-          <div className="bg-gray-700/50 border border-gray-600 rounded-lg p-4 text-gray-200 leading-relaxed">
+        <div style={{
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <strong style={{
+            color: '#aaa',
+            display: 'block',
+            marginBottom: '10px'
+          }}>Описание:</strong>
+          <div style={{
+            background: 'rgba(30, 30, 30, 0.8)',
+            padding: '15px',
+            borderRadius: '5px',
+            marginTop: '10px',
+            border: '1px solid #333',
+            color: '#f0f0f0',
+            lineHeight: '1.6'
+          }}>
             {scammer.description}
           </div>
         </div>

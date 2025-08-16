@@ -72,9 +72,27 @@ const HomePage = () => {
       <SearchBox onSearch={handleSearch} />
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
-          <p className="text-gray-400 mt-4">Загрузка данных...</p>
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '48px 0',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <div style={{
+            display: 'inline-block',
+            width: '32px',
+            height: '32px',
+            border: '2px solid #333',
+            borderTop: '2px solid #aaa',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }}></div>
+          <p style={{ color: '#aaa', marginTop: '16px', margin: '16px 0 0 0' }}>Загрузка данных...</p>
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
         </div>
       ) : (
         <ScammerTable
@@ -92,9 +110,17 @@ const HomePage = () => {
         scammer={selectedScammer}
       />
 
-      <footer className="text-center py-8 text-gray-500 border-t border-gray-700 mt-8">
-        <p className="mb-2">© 2025 База данных мошенников. Все права защищены.</p>
-        <p className="text-sm">Информация предоставляется исключительно в целях предупреждения и защиты пользователей.</p>
+      <footer style={{
+        textAlign: 'center',
+        padding: '30px 0',
+        color: '#777',
+        fontSize: '0.9rem',
+        borderTop: '1px solid #333',
+        marginTop: '20px',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+      }}>
+        <p style={{ marginBottom: '8px', margin: '0 0 8px 0' }}>© 2025 База данных мошенников. Все права защищены.</p>
+        <p style={{ margin: 0 }}>Информация предоставляется исключительно в целях предупреждения и защиты пользователей.</p>
       </footer>
     </Layout>
   );
