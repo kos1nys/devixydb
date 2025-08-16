@@ -67,6 +67,21 @@ class BackendTester:
             print(f"Request failed: {e}")
             raise
     
+    def test_old_admin_credentials_fail(self):
+        """Test that old admin credentials no longer work"""
+        try:
+            response = self.make_request("POST", "/auth/login", {
+                "username": OLD_ADMIN_USERNAME,
+                "password": OLD_ADMIN_PASSWORD
+            })
+            
+            if response.status_code == 401:
+                self.log_test("Old Admin Credentials (Should Fail)", True, "Old admin credentials correctly rejected")
+            else:
+                self.log_test("Old Admin Credentials (Should Fail)", False, f"Expected 401, got {response.status_code}", response.text)
+        except Exception as e:
+            self.log_test("Old Admin Credentials (Should Fail)", False, f"Exception: {str(e)}")
+    
     def test_auth_login_success(self):
         """Test successful admin login"""
         try:
