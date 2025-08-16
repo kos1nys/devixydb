@@ -12,7 +12,7 @@ from pathlib import Path
 from models import (
     Scammer, ScammerCreate, ScammerUpdate, ScammerResponse,
     User, UserCreate, UserLogin, UserResponse, Token, Statistics,
-    ScamMethod, ScammerStatus
+    ScammerStatus
 )
 from auth import (
     authenticate_user, create_access_token, get_current_user, 
