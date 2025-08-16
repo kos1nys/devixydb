@@ -173,25 +173,83 @@ const AdminDashboard = () => {
   return (
     <Layout>
       {/* Admin Header */}
-      <div className="flex items-center justify-between mb-8 p-6 bg-gray-800/60 border border-gray-700 rounded-lg backdrop-blur-sm">
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        marginBottom: '30px',
+        padding: '25px',
+        background: 'rgba(30, 30, 30, 0.8)',
+        border: '1px solid #333',
+        borderRadius: '10px',
+        boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+      }}>
         <div>
-          <h1 className="text-2xl font-bold text-white">
-            <i className="fas fa-cog mr-3 text-gray-400"></i>
+          <h1 style={{
+            fontSize: '1.8rem',
+            fontWeight: 'bold',
+            color: '#fff',
+            margin: '0 0 5px 0'
+          }}>
+            <i className="fas fa-cog mr-3" style={{ color: '#aaa' }}></i>
             Панель управления
           </h1>
-          <p className="text-gray-400 mt-1">Добро пожаловать, {user?.username}!</p>
+          <p style={{ color: '#aaa', margin: 0 }}>Добро пожаловать, {user?.username}!</p>
         </div>
-        <div className="flex gap-4">
+        <div style={{ display: 'flex', gap: '15px' }}>
           <button
             onClick={openCreateModal}
-            className="px-6 py-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white font-semibold rounded-lg transition-all transform hover:scale-105"
+            style={{
+              padding: '12px 25px',
+              background: 'linear-gradient(to right, #28a745, #20c997)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: '600',
+              transition: 'all 0.3s ease',
+              fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #218838, #1abc9c)';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #28a745, #20c997)';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
           >
             <i className="fas fa-plus mr-2"></i>
             Добавить мошенника
           </button>
           <button
             onClick={logout}
-            className="px-6 py-3 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 text-white font-semibold rounded-lg transition-all transform hover:scale-105"
+            style={{
+              padding: '12px 25px',
+              background: 'linear-gradient(to right, #dc3545, #e74c3c)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontWeight: '600',
+              transition: 'all 0.3s ease',
+              fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #c82333, #c0392b)';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #dc3545, #e74c3c)';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
           >
             <i className="fas fa-sign-out-alt mr-2"></i>
             Выйти
@@ -209,9 +267,27 @@ const AdminDashboard = () => {
       <SearchBox onSearch={handleSearch} />
 
       {loading ? (
-        <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
-          <p className="text-gray-400 mt-4">Загрузка данных...</p>
+        <div style={{ 
+          textAlign: 'center', 
+          padding: '48px 0',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>
+          <div style={{
+            display: 'inline-block',
+            width: '32px',
+            height: '32px',
+            border: '2px solid #333',
+            borderTop: '2px solid #aaa',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+          }}></div>
+          <p style={{ color: '#aaa', marginTop: '16px', margin: '16px 0 0 0' }}>Загрузка данных...</p>
+          <style>{`
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+          `}</style>
         </div>
       ) : (
         <ScammerTable
