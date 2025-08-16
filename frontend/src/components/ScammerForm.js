@@ -54,7 +54,7 @@ const ScammerForm = ({
     }
 
     if (!formData.scam_method) {
-      newErrors.scam_method = 'Выберите метод обмана';
+      newErrors.scam_method = 'Метод обмана обязателен';
     }
 
     if (!formData.description.trim()) {
@@ -91,20 +91,59 @@ const ScammerForm = ({
     }
   };
 
-  const scamMethods = [
-    'Фишинг',
-    'Вымогательство',
-    'Мошенничество с криптой',
-    'Поддельные раздачи',
-    'Продажа несуществующих услуг',
-    'Другое'
-  ];
+  const formGroupStyle = {
+    marginBottom: '20px'
+  };
+
+  const labelStyle = {
+    display: 'block',
+    marginBottom: '8px',
+    fontWeight: '600',
+    color: '#ccc',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  };
+
+  const inputStyle = {
+    width: '100%',
+    padding: '12px 15px',
+    borderRadius: '5px',
+    border: '1px solid #444',
+    background: '#1a1a1a',
+    color: '#fff',
+    fontSize: '1rem',
+    outline: 'none',
+    transition: 'all 0.3s ease',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    boxSizing: 'border-box'
+  };
+
+  const errorInputStyle = {
+    ...inputStyle,
+    borderColor: '#ff6b6b'
+  };
+
+  const buttonStyle = {
+    padding: '12px 25px',
+    background: 'linear-gradient(to right, #333, #555)',
+    color: 'white',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    fontSize: '1.1rem',
+    fontWeight: '600',
+    transition: 'all 0.3s ease',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    marginTop: '10px',
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+  };
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title}>
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+      <form onSubmit={handleSubmit}>
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>
             ID Discord *
           </label>
           <input
@@ -112,19 +151,29 @@ const ScammerForm = ({
             value={formData.discord_id}
             onChange={(e) => handleChange('discord_id', e.target.value)}
             placeholder="123456789012345678"
-            className={`w-full px-4 py-3 rounded-lg border bg-gray-700 text-white focus:outline-none focus:ring-2 transition-colors ${
-              errors.discord_id 
-                ? 'border-red-500 focus:ring-red-500/50' 
-                : 'border-gray-600 focus:border-gray-500 focus:ring-gray-500/50'
-            }`}
+            style={errors.discord_id ? errorInputStyle : inputStyle}
+            onFocus={(e) => {
+              if (!errors.discord_id) {
+                e.target.style.borderColor = '#666';
+                e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!errors.discord_id) {
+                e.target.style.borderColor = '#444';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
           />
           {errors.discord_id && (
-            <p className="text-red-400 text-sm mt-1">{errors.discord_id}</p>
+            <p style={{ color: '#ff6b6b', fontSize: '0.9rem', marginTop: '5px', margin: '5px 0 0 0' }}>
+              {errors.discord_id}
+            </p>
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>
             Ник Discord *
           </label>
           <input
@@ -132,19 +181,29 @@ const ScammerForm = ({
             value={formData.discord_name}
             onChange={(e) => handleChange('discord_name', e.target.value)}
             placeholder="Scammer#1234"
-            className={`w-full px-4 py-3 rounded-lg border bg-gray-700 text-white focus:outline-none focus:ring-2 transition-colors ${
-              errors.discord_name 
-                ? 'border-red-500 focus:ring-red-500/50' 
-                : 'border-gray-600 focus:border-gray-500 focus:ring-gray-500/50'
-            }`}
+            style={errors.discord_name ? errorInputStyle : inputStyle}
+            onFocus={(e) => {
+              if (!errors.discord_name) {
+                e.target.style.borderColor = '#666';
+                e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!errors.discord_name) {
+                e.target.style.borderColor = '#444';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
           />
           {errors.discord_name && (
-            <p className="text-red-400 text-sm mt-1">{errors.discord_name}</p>
+            <p style={{ color: '#ff6b6b', fontSize: '0.9rem', marginTop: '5px', margin: '5px 0 0 0' }}>
+              {errors.discord_name}
+            </p>
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>
             Метод обмана *
           </label>
           <input
@@ -152,26 +211,44 @@ const ScammerForm = ({
             value={formData.scam_method}
             onChange={(e) => handleChange('scam_method', e.target.value)}
             placeholder="Например: Фишинг, Вымогательство, Мошенничество с криптой..."
-            className={`w-full px-4 py-3 rounded-lg border bg-gray-700 text-white focus:outline-none focus:ring-2 transition-colors ${
-              errors.scam_method 
-                ? 'border-red-500 focus:ring-red-500/50' 
-                : 'border-gray-600 focus:border-gray-500 focus:ring-gray-500/50'
-            }`}
+            style={errors.scam_method ? errorInputStyle : inputStyle}
+            onFocus={(e) => {
+              if (!errors.scam_method) {
+                e.target.style.borderColor = '#666';
+                e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!errors.scam_method) {
+                e.target.style.borderColor = '#444';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
           />
           {errors.scam_method && (
-            <p className="text-red-400 text-sm mt-1">{errors.scam_method}</p>
+            <p style={{ color: '#ff6b6b', fontSize: '0.9rem', marginTop: '5px', margin: '5px 0 0 0' }}>
+              {errors.scam_method}
+            </p>
           )}
         </div>
 
         {scammer && (
-          <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+          <div style={formGroupStyle}>
+            <label style={labelStyle}>
               Статус
             </label>
             <select
               value={formData.status}
               onChange={(e) => handleChange('status', e.target.value)}
-              className="w-full px-4 py-3 rounded-lg border border-gray-600 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:border-gray-500 focus:ring-gray-500/50 transition-colors"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.target.style.borderColor = '#666';
+                e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+              }}
+              onBlur={(e) => {
+                e.target.style.borderColor = '#444';
+                e.target.style.boxShadow = 'none';
+              }}
             >
               <option value="active">Активен</option>
               <option value="inactive">Неактивен</option>
@@ -179,8 +256,8 @@ const ScammerForm = ({
           </div>
         )}
 
-        <div>
-          <label className="block text-sm font-medium text-gray-300 mb-2">
+        <div style={formGroupStyle}>
+          <label style={labelStyle}>
             Описание *
           </label>
           <textarea
@@ -188,40 +265,87 @@ const ScammerForm = ({
             onChange={(e) => handleChange('description', e.target.value)}
             placeholder="Подробное описание действий мошенника..."
             rows={4}
-            className={`w-full px-4 py-3 rounded-lg border bg-gray-700 text-white focus:outline-none focus:ring-2 transition-colors resize-vertical ${
-              errors.description 
-                ? 'border-red-500 focus:ring-red-500/50' 
-                : 'border-gray-600 focus:border-gray-500 focus:ring-gray-500/50'
-            }`}
+            style={{
+              ...inputStyle,
+              minHeight: '100px',
+              resize: 'vertical',
+              ...(errors.description ? { borderColor: '#ff6b6b' } : {})
+            }}
+            onFocus={(e) => {
+              if (!errors.description) {
+                e.target.style.borderColor = '#666';
+                e.target.style.boxShadow = '0 0 8px rgba(100, 100, 100, 0.5)';
+              }
+            }}
+            onBlur={(e) => {
+              if (!errors.description) {
+                e.target.style.borderColor = '#444';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
           />
           {errors.description && (
-            <p className="text-red-400 text-sm mt-1">{errors.description}</p>
+            <p style={{ color: '#ff6b6b', fontSize: '0.9rem', marginTop: '5px', margin: '5px 0 0 0' }}>
+              {errors.description}
+            </p>
           )}
         </div>
 
-        <div className="flex gap-4 pt-4">
+        <div style={{ display: 'flex', gap: '15px', paddingTop: '20px' }}>
           <button
             type="submit"
             disabled={loading}
-            className="flex-1 px-6 py-3 bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 disabled:from-gray-800 disabled:to-gray-800 text-white font-semibold rounded-lg transition-all transform hover:scale-[1.02] disabled:scale-100 disabled:cursor-not-allowed"
+            style={{
+              ...buttonStyle,
+              flex: '1',
+              opacity: loading ? 0.7 : 1,
+              cursor: loading ? 'not-allowed' : 'pointer'
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) {
+                e.target.style.background = 'linear-gradient(to right, #444, #666)';
+                e.target.style.transform = 'translateY(-2px)';
+                e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) {
+                e.target.style.background = 'linear-gradient(to right, #333, #555)';
+                e.target.style.transform = 'translateY(0)';
+                e.target.style.boxShadow = 'none';
+              }
+            }}
           >
             {loading ? (
-              <span className="flex items-center justify-center">
-                <i className="fas fa-spinner fa-spin mr-2"></i>
+              <>
+                <i className="fas fa-spinner fa-spin"></i>
                 Сохранение...
-              </span>
+              </>
             ) : (
-              <span className="flex items-center justify-center">
-                <i className="fas fa-save mr-2"></i>
+              <>
+                <i className="fas fa-save"></i>
                 {scammer ? 'Сохранить изменения' : 'Добавить в базу'}
-              </span>
+              </>
             )}
           </button>
           
           <button
             type="button"
             onClick={onClose}
-            className="px-6 py-3 bg-gray-600 hover:bg-gray-500 text-white font-semibold rounded-lg transition-all"
+            style={{
+              ...buttonStyle,
+              background: 'linear-gradient(to right, #555, #777)'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #666, #888)';
+              e.target.style.transform = 'translateY(-2px)';
+              e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'linear-gradient(to right, #555, #777)';
+              e.target.style.transform = 'translateY(0)';
+              e.target.style.boxShadow = 'none';
+            }}
           >
             Отмена
           </button>

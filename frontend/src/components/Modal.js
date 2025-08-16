@@ -4,23 +4,73 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = "max-w-2xl" }) => 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div style={{
+      display: 'block',
+      position: 'fixed',
+      zIndex: 1000,
+      left: 0,
+      top: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.7)'
+    }}>
       <div 
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%'
+        }}
         onClick={onClose}
       ></div>
       
-      <div className={`relative bg-gray-800 border border-gray-600 rounded-lg ${maxWidth} w-full mx-4 max-h-[90vh] overflow-y-auto`}>
-        <div className="flex items-center justify-between p-6 border-b border-gray-600">
-          <h2 className="text-xl font-semibold text-gray-200">{title}</h2>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 rounded-full bg-gray-700 hover:bg-gray-600 flex items-center justify-center text-gray-400 hover:text-white transition-all"
-          >
-            <i className="fas fa-times"></i>
-          </button>
-        </div>
-        <div className="p-6">
+      <div style={{
+        background: '#1a1a1a',
+        margin: '5% auto',
+        padding: '30px',
+        border: '1px solid #333',
+        borderRadius: '10px',
+        width: '80%',
+        maxWidth: '700px',
+        boxShadow: '0 10px 30px rgba(0, 0, 0, 0.5)',
+        position: 'relative',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+      }}>
+        <button
+          onClick={onClose}
+          style={{
+            color: '#aaa',
+            float: 'right',
+            fontSize: '28px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            position: 'absolute',
+            right: '20px',
+            top: '15px',
+            background: 'none',
+            border: 'none',
+            transition: 'color 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.color = '#fff';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.color = '#aaa';
+          }}
+        >
+          <i className="fas fa-times"></i>
+        </button>
+        
+        <h2 style={{
+          marginBottom: '20px',
+          color: '#ddd',
+          borderBottom: '1px solid #333',
+          paddingBottom: '15px',
+          fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+        }}>{title}</h2>
+        
+        <div>
           {children}
         </div>
       </div>
