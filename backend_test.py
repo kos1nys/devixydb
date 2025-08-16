@@ -391,6 +391,7 @@ class BackendTester:
         # Authentication Tests
         print("🔐 AUTHENTICATION TESTS")
         print("-" * 30)
+        self.test_old_admin_credentials_fail()
         self.test_auth_login_success()
         self.test_auth_login_failure()
         self.test_auth_me_with_token()
