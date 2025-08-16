@@ -116,6 +116,9 @@ backend:
       - working: true
         agent: "main"
         comment: "Implemented JWT authentication with bcrypt password hashing, login/register endpoints, token validation"
+      - working: true
+        agent: "testing"
+        comment: "✅ NEW AUTHENTICATION SYSTEM VERIFIED: New admin credentials (cyber_admin_2025/Sc4mm3r_Db@Pr0t3ct!) working perfectly. Old credentials (admin/admin123) correctly disabled. Token generation and validation working. /api/auth/me endpoint secure and functional."
   
   - task: "User Management Models"
     implemented: true
