@@ -78,7 +78,7 @@ const ScammerTable = ({
                         {onEdit && (
                           <button
                             onClick={() => onEdit(scammer)}
-                            className="w-9 h-9 rounded-full bg-blue-600 hover:bg-blue-500 border border-blue-500 flex items-center justify-center text-white transition-all"
+                            className="w-9 h-9 rounded-full bg-gray-700 hover:bg-gray-600 border border-gray-500 flex items-center justify-center text-gray-300 hover:text-white transition-all"
                           >
                             <i className="fas fa-edit text-sm"></i>
                           </button>

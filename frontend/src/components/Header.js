@@ -14,7 +14,7 @@ const Header = ({ title, subtitle, showStats = false, stats = null }) => {
       {showStats && stats && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 max-w-4xl mx-auto">
           <div 
-            className="rounded-lg p-6 backdrop-blur-sm border border-gray-700"
+            className="rounded-lg p-6 backdrop-blur-sm border-2 border-white/30"
             style={{
               background: 'rgba(30, 30, 30, 0.8)',
               boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)'
@@ -26,7 +26,7 @@ const Header = ({ title, subtitle, showStats = false, stats = null }) => {
             </div>
           </div>
           <div 
-            className="rounded-lg p-6 backdrop-blur-sm border border-gray-700"
+            className="rounded-lg p-6 backdrop-blur-sm border-2 border-white/30"
             style={{
               background: 'rgba(30, 30, 30, 0.8)',
               boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)'
@@ -38,7 +38,7 @@ const Header = ({ title, subtitle, showStats = false, stats = null }) => {
             </div>
           </div>
           <div 
-            className="rounded-lg p-6 backdrop-blur-sm border border-gray-700"
+            className="rounded-lg p-6 backdrop-blur-sm border-2 border-white/30"
             style={{
               background: 'rgba(30, 30, 30, 0.8)',
               boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)'
