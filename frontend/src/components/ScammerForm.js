@@ -147,20 +147,17 @@ const ScammerForm = ({
           <label className="block text-sm font-medium text-gray-300 mb-2">
             Метод обмана *
           </label>
-          <select
+          <input
+            type="text"
             value={formData.scam_method}
             onChange={(e) => handleChange('scam_method', e.target.value)}
+            placeholder="Например: Фишинг, Вымогательство, Мошенничество с криптой..."
             className={`w-full px-4 py-3 rounded-lg border bg-gray-700 text-white focus:outline-none focus:ring-2 transition-colors ${
               errors.scam_method 
                 ? 'border-red-500 focus:ring-red-500/50' 
                 : 'border-gray-600 focus:border-gray-500 focus:ring-gray-500/50'
             }`}
-          >
-            <option value="">Выберите метод</option>
-            {scamMethods.map((method) => (
-              <option key={method} value={method}>{method}</option>
-            ))}
-          </select>
+          />
           {errors.scam_method && (
             <p className="text-red-400 text-sm mt-1">{errors.scam_method}</p>
           )}
