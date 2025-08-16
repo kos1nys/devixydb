@@ -4,14 +4,6 @@ from datetime import datetime
 import uuid
 from enum import Enum
 
-class ScamMethod(str, Enum):
-    PHISHING = "Фишинг"
-    EXTORTION = "Вымогательство" 
-    CRYPTO_SCAM = "Мошенничество с криптой"
-    FAKE_GIVEAWAY = "Поддельные раздачи"
-    FAKE_SERVICES = "Продажа несуществующих услуг"
-    OTHER = "Другое"
-
 class ScammerStatus(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
@@ -48,7 +40,7 @@ class Scammer(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     discord_id: str
     discord_name: str
-    scam_method: ScamMethod
+    scam_method: str  # Changed from enum to simple string
     description: str
     status: ScammerStatus = ScammerStatus.ACTIVE
     created_at: datetime = Field(default_factory=datetime.utcnow)
@@ -57,13 +49,13 @@ class Scammer(BaseModel):
 class ScammerCreate(BaseModel):
     discord_id: str
     discord_name: str
-    scam_method: ScamMethod
+    scam_method: str  # Changed from enum to simple string
     description: str
 
 class ScammerUpdate(BaseModel):
     discord_id: Optional[str] = None
     discord_name: Optional[str] = None
-    scam_method: Optional[ScamMethod] = None
+    scam_method: Optional[str] = None  # Changed from enum to simple string
     description: Optional[str] = None
     status: Optional[ScammerStatus] = None
 
@@ -71,7 +63,7 @@ class ScammerResponse(BaseModel):
     id: str
     discord_id: str
     discord_name: str
-    scam_method: ScamMethod
+    scam_method: str  # Changed from enum to simple string
     description: str
     status: ScammerStatus
     created_at: datetime
