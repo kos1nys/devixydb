@@ -9,23 +9,68 @@ const SearchBox = ({ onSearch, placeholder = "Поиск по ID Discord или 
   };
 
   return (
-    <div className="border-2 border-white/30 rounded-lg p-6 mb-8 backdrop-blur-sm" style={{
-      background: 'rgba(15, 15, 15, 0.9)'
+    <div style={{
+      background: 'rgba(30, 30, 30, 0.8)',
+      borderRadius: '10px',
+      padding: '25px',
+      marginBottom: '30px',
+      boxShadow: '0 5px 15px rgba(0, 0, 0, 0.5)',
+      border: '1px solid #333'
     }}>
-      <form onSubmit={handleSubmit} className="flex gap-4">
+      <form onSubmit={handleSubmit} style={{
+        display: 'flex',
+        gap: '15px'
+      }}>
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={placeholder}
-          className="flex-1 px-5 py-3 rounded-full border-2 border-white/30 text-white text-lg outline-none focus:border-white/50 focus:ring-2 focus:ring-white/20 transition-all" 
           style={{
-            background: 'rgba(0, 0, 0, 0.7)'
+            flex: '1',
+            padding: '15px 20px',
+            borderRadius: '50px',
+            border: '1px solid #444',
+            background: '#1a1a1a',
+            color: '#fff',
+            fontSize: '1.1rem',
+            outline: 'none',
+            transition: 'all 0.3s ease',
+            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#666';
+            e.target.style.boxShadow = '0 0 10px rgba(100, 100, 100, 0.5)';
+          }}
+          onBlur={(e) => {
+            e.target.style.borderColor = '#444';
+            e.target.style.boxShadow = 'none';
           }}
         />
         <button
           type="submit"
-          className="px-8 py-3 bg-gradient-to-r from-gray-700 to-gray-600 hover:from-gray-600 hover:to-gray-500 text-white font-semibold rounded-full transition-all transform hover:scale-105 hover:shadow-lg border-2 border-white/20"
+          style={{
+            padding: '15px 30px',
+            background: 'linear-gradient(to right, #333, #555)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '50px',
+            cursor: 'pointer',
+            fontSize: '1.1rem',
+            fontWeight: '600',
+            transition: 'all 0.3s ease',
+            fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.background = 'linear-gradient(to right, #444, #666)';
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.3)';
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.background = 'linear-gradient(to right, #333, #555)';
+            e.target.style.transform = 'translateY(0)';
+            e.target.style.boxShadow = 'none';
+          }}
         >
           <i className="fas fa-search mr-2"></i>
           Найти

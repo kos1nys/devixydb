@@ -2,8 +2,11 @@ import React from 'react';
 
 const Layout = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 relative overflow-hidden" style={{
-      background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)'
+    <div className="min-h-screen relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%)',
+      color: '#f0f0f0',
+      padding: '20px',
+      lineHeight: '1.6'
     }}>
       {/* Белые градиентные круги на фоне */}
       <div className="absolute inset-0 pointer-events-none">
@@ -33,7 +36,7 @@ const Layout = ({ children }) => {
         />
       </div>
       
-      <div className="container mx-auto px-4 py-8 max-w-7xl relative z-10">
+      <div className="relative z-10" style={{ maxWidth: '1200px', margin: '0 auto' }}>
         {children}
       </div>
     </div>
