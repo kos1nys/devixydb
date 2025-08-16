@@ -386,6 +386,7 @@ class BackendTester:
         print("=" * 60)
         print(f"Testing against: {self.base_url}")
         print(f"Admin credentials: {ADMIN_USERNAME}/{ADMIN_PASSWORD}")
+        print(f"Testing security: Old credentials {OLD_ADMIN_USERNAME}/{OLD_ADMIN_PASSWORD} should be disabled")
         print()
         
         # Authentication Tests
