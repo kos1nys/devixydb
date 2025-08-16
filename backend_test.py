@@ -12,8 +12,10 @@ from typing import Dict, Any, Optional
 
 # Configuration
 BASE_URL = "https://ui-enhancement-20.preview.emergentagent.com/api"
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin123"
+ADMIN_USERNAME = "cyber_admin_2025"
+ADMIN_PASSWORD = "Sc4mm3r_Db@Pr0t3ct!"
+OLD_ADMIN_USERNAME = "admin"
+OLD_ADMIN_PASSWORD = "admin123"
 
 class BackendTester:
     def __init__(self):
