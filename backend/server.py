@@ -259,14 +259,20 @@ logger = logging.getLogger(__name__)
 @app.on_event("startup")
 async def startup_db_client():
     # Create default admin user if not exists
-    existing_admin = await db.users.find_one({"username": "admin"})
+    existing_admin = await db.users.find_one({"username": "cyber_admin_2025"})
     if not existing_admin:
         admin_user = User(
-            username="admin",
-            password_hash=get_password_hash("admin123")  # Default password
+            username="cyber_admin_2025",
+            password_hash=get_password_hash("Sc4mm3r_Db@Pr0t3ct!")  # Secure password
         )
         await db.users.insert_one(admin_user.dict())
-        logger.info("Default admin user created with username: admin, password: admin123")
+        logger.info("Secure admin user created with username: cyber_admin_2025")
+        
+    # Remove old default admin if exists for security
+    old_admin = await db.users.find_one({"username": "admin"})
+    if old_admin:
+        await db.users.delete_one({"username": "admin"})
+        logger.info("Old default admin user removed for security")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():
